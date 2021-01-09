@@ -1,0 +1,5 @@
+@use '../../styles/units';
+
+.container {
+  padding-bottom: map-get(units.$spacing, section);
+}

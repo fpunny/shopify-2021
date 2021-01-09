@@ -1,0 +1,12 @@
+
+$_media-queries: (
+  phone: 425px,
+  tablet: 768px,
+  laptop: 1024px,
+);
+
+@mixin media($query) {
+  @media only screen and (max-width: map-get($_media-queries, $query)) {
+    @content
+  }
+}

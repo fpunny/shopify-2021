@@ -1,0 +1,52 @@
+$_colors: (
+  background: #f3f4f5,
+  background-alt: #ffffff,
+  text: #2d2d2d,
+  text-alt: #c6cbd1,
+);
+
+$colors: map-merge($_colors, (
+  primary: #2667ff,
+  primary-alt: #3f8efc,
+));
+
+// Useful for creating buttons / interactions with the color
+@mixin _interactiveColors($tag, $color) {
+  --color-#{$tag}--hover: #{darken($color, 0.04)};
+  --color-#{$tag}--active: #{darken($color, 0.08)};
+}
+
+// For generating colors as css variables
+@mixin init {
+  :root {
+    @each $tag, $color in $colors {
+      --color-#{$tag}: #{$color};
+    }
+  }
+
+  // Important for people who have this theme atm
+  .theme--dark {
+    :root {
+      @each $tag, $color in $_colors {
+        --color-#{$tag}: #{invert($color)};
+      }
+    }
+  }
+}
+
+// For loading later
+@mixin deferred {
+  :root {
+    @each $tag, $color in $_colors {
+      @include _interactiveColors($tag, $color);
+    }
+  }
+
+  .theme--dark {
+    :root {
+      @each $tag, $color in $_colors {
+        @include _interactiveColors($tag, invert($color));
+      }
+    }
+  }
+}
