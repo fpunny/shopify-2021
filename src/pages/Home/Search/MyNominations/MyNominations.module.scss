@@ -1,0 +1,38 @@
+@use '../../../../styles/mixins';
+@use '../../../../styles/units';
+
+.button {
+    margin-top: auto;
+}
+
+.heading {
+    margin-bottom: map-get(units.$spacing, section);
+}
+
+.popup {
+    padding: map-get(units.$spacing, section);
+}
+
+.form-heading {
+    margin: map-get(units.$spacing, section) 0 map-get(units.$spacing, component);
+}
+
+.field {
+    display: grid;
+    grid-gap: map-get(units.$spacing, container);
+    grid-template-columns: 1fr max-content;
+    margin-bottom: map-get(units.$spacing, container);
+
+    @include mixins.media(tablet) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.button {
+    margin-top: auto;
+}
+
+.hidden {
+    display: none;
+    visibility: hidden;
+}

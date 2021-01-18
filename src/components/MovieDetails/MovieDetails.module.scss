@@ -1,0 +1,53 @@
+@use '../../styles/mixins';
+@use '../../styles/units';
+
+.list-default {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: map-get(units.$spacing, section);
+
+    @include mixins.media(tablet) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.content {
+    @include mixins.media(tablet) {
+        grid-row-start: 1;
+    }
+}
+
+.poster {
+    border-radius: units.$radius;
+    @include mixins.media(tablet) {
+        display: none;
+    }
+}
+
+.stats {
+    @extend .list-default;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.stat {
+    margin-right: map-get(units.$spacing, container);
+}
+
+.heading {
+    margin: map-get(units.$spacing, section) 0 map-get(units.$spacing, component);
+}
+
+.team {
+    @extend .list-default;
+}
+
+.team-item {
+    margin-bottom: map-get(units.$spacing, component);
+}

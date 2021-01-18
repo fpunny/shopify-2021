@@ -1,0 +1,74 @@
+@use '../../styles/mixins';
+@use '../../styles/colors';
+@use '../../styles/units';
+
+.container {
+    display: block;
+}
+
+.label {
+    margin-bottom: map-get(units.$spacing, element);
+    display: block;
+}
+
+.input {
+    @include mixins.transition(background-color border-color);
+    border: 2.5px solid var(--color-background-alt);
+    background-color: var(--color-background-alt);
+    border-radius: units.$radius;
+    align-items: center;
+    display: flex;
+
+    &:hover {
+        background-color: var(--color-background-alt--hover);
+        border-color: var(--color-background-alt--hover);
+    }
+
+    &--active, &--active:hover {
+        background-color: var(--color-background-alt--active);
+        border-color: var(--color-background-alt--active);
+    }
+}
+
+.icon {
+    padding: map-get(units.$spacing, input);
+    color: var(--color-text-alt);
+    font-size: 0.8rem;
+    display: flex;
+
+    &--left {
+        padding-right: 0;
+    }
+
+    &--right {
+        padding-left: 0;
+    }
+}
+
+.element {
+    padding: map-get(units.$spacing, input);
+    font-family: 'Inter', sans-serif;
+    background-color: transparent;
+    color: var(--color-text);
+    font-weight: bold;
+    appearance: none;
+    outline: none;
+    border: none;
+    width: 100%;
+
+    &::placeholder {
+        color: var(--color-text-alt);
+    }
+}
+
+.loading {
+    animation: spin 2s linear 0s infinite;
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+}
+
+.status {
+    margin-top: map-get(units.$spacing, element);
+}

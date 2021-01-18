@@ -1,6 +1,51 @@
+@use './units';
+
+// Add tranisitions to attributes because im lazy
+@mixin transition($attrs, $speed: normal) {
+  $res: '';
+
+  // Multiple attributes
+  @if type-of($attrs) == list {
+    @each $attr in $attrs {
+      $res: #{$res}, _makeTransition($attr, $speed);
+    }
+
+    // Single/no attribute
+  } @else {
+    $res: _makeTransition($attrs, $speed);
+  }
+
+  // This is where the magic of this mixin comes in, we would only use transitions if
+  // animate class exists OR user wants motion enabled
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.animate) & {
+      transition: $res;
+    }
+  }
+}
+
+// Builds a transition with given props
+@function _makeTransition($attr, $speed) {
+  // Default (Please never do this)
+  $res: all map-get(units.$speed, $speed) units.$ease;
+
+  // Attribute with default props
+  @if type-of($attr) == string {
+    $res: $attr map-get(units.$speed, $speed) units.$ease;
+
+    // Attribute with custom props
+  } @else if type-of($attr) == map {
+    $speed: if(map-has-key($attr, speed), map-get($attr, speed), $speed);
+    $res: map-get($attr, name)
+      map-get(units.$speed, $speed)
+      units.$ease;
+  }
+
+  @return $res;
+}
 
 $_media-queries: (
-  phone: 425px,
+  phone: 525px,
   tablet: 768px,
   laptop: 1024px,
 );

@@ -1,5 +1,20 @@
+@use '../../styles/colors';
 @use '../../styles/units';
 
 .container {
-  padding-bottom: map-get(units.$spacing, section);
+  padding: map-get(units.$spacing, section);
+  justify-content: center;
+  box-sizing: border-box;
+  display: flex;
+
+  @each $color in map-keys(colors.$colors) {
+    &--color-#{$color} {
+      background-color: var(--color--#{$color});
+    }
+  }
+}
+
+.content {
+  max-width: units.$page-width;
+  width: 100%;
 }

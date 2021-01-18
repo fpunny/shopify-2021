@@ -1,0 +1,5 @@
+@use '../../styles/units';
+
+.heading {
+    margin-bottom: map-get(units.$spacing, section);
+}

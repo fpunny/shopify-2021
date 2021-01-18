@@ -1,0 +1,152 @@
+@use '../../styles/mixins';
+@use '../../styles/colors';
+@use '../../styles/units';
+
+.pane {
+    @include mixins.transition(transform opacity, page);
+    padding: map-get(units.$spacing, container) map-get(units.$spacing, section);
+    transform: translateY(0);
+
+    &--content {
+        align-items: center;
+        line-height: 1;
+        display: flex;
+
+        &-hide {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+    }
+
+    &--loading {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        &-hide {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+    }
+}
+
+.loader {
+    animation: spin 1s ease infinite;
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform:  rotate(360deg); }
+    }
+}
+
+.button {
+    border-radius: units.$radius;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+
+    &:disabled {
+        &:hover, &:active, &:focus, & {
+            background-color: var(--color-background-alt--hover);
+            cursor: not-allowed;
+        }
+    }
+
+    &--button {
+        appearance: none;
+        background: none;
+        outline: none;
+        border: none;
+    }
+
+    &--link {
+        text-decoration: none;
+    }
+
+    &--color {
+        @each $color, $_ in colors.$colors {
+            &-#{$color} {
+                --active-color: var(--color-#{$color}--active);
+                --hover-color: var(--color-#{$color}--hover);
+                --base-color: var(--color-#{$color});
+            }
+        }
+    }
+
+    &--style {
+        &-solid {
+            @include mixins.transition(background-color);
+            background-color: var(--base-color);
+            color: var(--color-background);
+
+            &:hover, &:focus {
+                background-color: var(--hover-color);
+            }
+
+            &:active {
+                background-color: var(--active-color);
+            }
+        }
+
+        &-ghost {
+            @include mixins.transition(background-color);
+            background-color: var(--color-background);
+            color: var(--base-color);
+
+            &:hover, &:focus {
+                background-color: var(--color-background--hover);
+            }
+
+            &:active {
+                background-color: var(--color-background--active);
+            }
+        }
+
+        &-outline {
+            @include mixins.transition(background-color border-color);
+            border: 2px solid var(--base-color);
+            color: var(--base-color);
+
+            & .pane {
+                @include mixins.transition(transform color);
+                padding: calc(#{map-get(units.$spacing, container)} - 2px) calc(#{map-get(units.$spacing, section)} - 2px);
+            }
+
+            &:hover, &:focus {
+                background-color: var(--color-background--hover);
+                border-color: var(--hover-color);
+                & .pane--content {
+                    color: var(--hover-color);
+                }
+            }
+
+            &:active {
+                background-color: var(--color-background--active);
+                border-color: var(--active-color);
+                & .pane--content {
+                    color: var(--active-color);
+                }
+            }
+        }
+    }
+}
+
+.icon {
+    box-sizing: border-box;
+    font-size: 0.875rem;
+    padding-bottom: 1px;
+    display: flex;
+
+    &--left {
+        margin-right: map-get(units.$spacing, component);
+    }
+
+    &--right {
+        margin-left: map-get(units.$spacing, component);
+    }
+}

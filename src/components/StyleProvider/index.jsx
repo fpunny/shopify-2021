@@ -7,6 +7,7 @@ export const ThemeContext = createContext({
   darkMode: false,
 });
 
+const root = document.body;
 export default function StyleProvider({ children }) {
   const [theme, setTheme] = useState({ darkMode: false });
   const setDarkMode = useCallback((mode) => {
@@ -21,6 +22,7 @@ export default function StyleProvider({ children }) {
       // Ideally I want to use helmet to also preload this, but this is as good as it gets for CRA
       // (I tried parcel which can let me do this, but its super finicky since v2 is beta)
       import('../../styles/deferred.scss');
+      root.classList.add(`animate`);
     });
   }, []);
 

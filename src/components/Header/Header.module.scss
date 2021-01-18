@@ -1,0 +1,5 @@
+@use '../../styles/units';
+
+.header {
+    padding-top: map-get(units.$spacing, section);
+}

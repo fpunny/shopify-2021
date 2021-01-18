@@ -1,0 +1,10 @@
+@use '../../../styles/units';
+
+.popup {
+    padding: map-get(units.$spacing, section);
+}
+
+.button {
+    margin-top: map-get(units.$spacing, component);
+    width: 100%;
+}

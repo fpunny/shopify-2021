@@ -1,10 +1,29 @@
-$page-width: 80rem;
-$nav-width: 20rem;
+$page-width: 70rem;
+$popup-width: 50rem;
+$ease: cubic-bezier(0.4, 0, 0.2, 1);
+$radius: 6px;
+
+$speed: (
+  page: 500ms,
+  slow: 300ms,
+  normal: 200ms,
+  fast: 100ms,
+);
 
 $spacing: (
   section: 1.5rem,
   container: 1rem,
+  input: 0.75rem,
   component: 0.5rem,
   element: 0.25rem,
   tad: 0.125rem,
 );
+
+@mixin exportSpeeds {
+  :export {
+    @each $tag, $val in $speed {
+      // Thanks - https://github.com/sass/sass/issues/533#issuecomment-36324152
+      speed-#{$tag}: $val / ($val * 0 + 1);
+    }
+  }
+}
