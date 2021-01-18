@@ -5,11 +5,12 @@ import styles from './Section.module.scss';
 
 export default function Section({
   backgroundColor = `background`,
+  tag: Component = `section`,
   className,
   children,
 }) {
   return (
-    <section
+    <Component
       className={classNames(
         styles[`container--color-${backgroundColor}`],
         styles.container,
@@ -17,7 +18,7 @@ export default function Section({
     >
       {/* Classname here to preserve rules that section has in parent */}
       <div className={classNames(styles.content, className)}>{children}</div>
-    </section>
+    </Component>
   );
 }
 
@@ -29,4 +30,5 @@ Section.propTypes = {
   ]),
   className: ClassNamesPropType,
   children: PropTypes.node,
+  tag: PropTypes.elementType,
 };

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { FaLink } from 'react-icons/fa';
 import getShareableLink from '../../../../utils/getShareLink';
 import fetchOMDb from '../../../../utils/fetchOMDb';
 import MoviesList from '../../../../components/MoviesList';
@@ -105,6 +106,7 @@ export default function MyNominations({ userSession }) {
                   name='name'
                 />
                 <Button
+                  leftIcon={FaLink}
                   disabled={copied}
                   className={styles.button}
                   type='outline'

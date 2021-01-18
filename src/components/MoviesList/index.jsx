@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { FaStar } from 'react-icons/fa';
+import { FaCaretDown, FaStar } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import noImageFound from '../../assets/no-image.jpg';
 import { SessionContext } from '../SessionProvider';
@@ -69,6 +69,8 @@ export default function MoviesList({ movies = {}, readOnly, fetchNextPage }) {
       {movies.totalResults &&
         (currentPage.page !== maxPage ? (
           <Button
+            rightIcon={FaCaretDown}
+            leftIcon={FaCaretDown}
             onClick={async () => {
               setLoading(true);
               const nextPage = currentPage.page + 1;

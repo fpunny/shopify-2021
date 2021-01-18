@@ -5,6 +5,8 @@
 .pane {
     @include mixins.transition(transform opacity, page);
     padding: map-get(units.$spacing, container) map-get(units.$spacing, section);
+    display: flex;
+    align-items: center;
     transform: translateY(0);
 
     &--content {
@@ -40,6 +42,10 @@
         from { transform: rotate(0deg); }
         to { transform:  rotate(360deg); }
     }
+}
+
+.text {
+    flex-grow: 1;
 }
 
 .button {

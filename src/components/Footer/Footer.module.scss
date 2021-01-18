@@ -1,0 +1,17 @@
+@use '../../styles/units';
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.author {
+    margin: map-get(units.$spacing, container) 0;
+    margin-right: auto;
+    padding-right: map-get(units.$spacing, container);
+}
+
+.link {
+
+}

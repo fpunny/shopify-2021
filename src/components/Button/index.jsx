@@ -69,7 +69,9 @@ export default function Button({
             <LeftIcon />
           </span>
         )}
-        {children}
+        <span className={styles.text}>
+          {children}
+        </span>
         {RightIcon && (
           <span className={classNames(styles.icon, styles[`icon--right`])}>
             <RightIcon />
